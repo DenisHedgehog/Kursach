@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Курсовая работа</string>
+    <string name="login_hint">Логин</string>
+    <string name="password_hint">Пароль</string>
+    <string name="login_button_text">Войти</string>
+    <string name="forgot_password_text">Забыли пароль?</string>
+    <string name="create_account_text">Создать аккаунт</string>
+    <string name="registration_login_hint">Логин (обязательно)</string>
+    <string name="registration_password_hint">Пароль (обязательно)</string>
+    <string name="registration_email_hint">Адрес электронной почты (обязательно)</string>
+    <string name="male_text">Мужской</string>
+    <string name="female_text">Женский</string>
+    <string name="choose_gender">Пол</string>
+    <string name="registration_age_hint">Возраст (обязательно)</string>
+    <string name="registration_repeat_password_hint">Повторите пароль (обязательно)</string>
+    <string name="cancel_button_text">Отмена</string>
+    <array name="gender">
+        <item>Мужской</item>
+        <item>Женский</item>
+    </array>
+</resources>

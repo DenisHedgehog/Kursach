@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2pt"
+        android:id="@+id/registration_login_edit_text"
+        android:hint="@string/registration_login_hint" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2pt"
+        android:id="@+id/registration_password_edit_text"
+        android:hint="@string/registration_password_hint"
+        android:inputType="textPassword"
+        android:fontFamily="sans-serif" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2pt"
+        android:id="@+id/registration_repeat_password_edit_text"
+        android:hint="@string/registration_repeat_password_hint"
+        android:inputType="textPassword"
+        android:fontFamily="sans-serif" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2pt"
+        android:id="@+id/registration_email_edit_text"
+        android:hint="@string/registration_email_hint"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2pt"
+        android:id="@+id/registration_age_edit_text"
+        android:hint="@string/registration_age_hint" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:prompt="@string/choose_gender"
+        android:entries="@array/gender"
+        android:id="@+id/registration_gender_spinner"
+        android:layout_margin="2pt"
+        android:padding="4pt" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/create_account_text"
+        android:id="@+id/create_account_id"
+        android:layout_marginTop="4dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel_button_text"
+        android:id="@+id/cancel_button_id" />
+
+</LinearLayout>
