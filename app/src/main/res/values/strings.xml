@@ -14,6 +14,7 @@
     <string name="registration_age_hint">Возраст (обязательно)</string>
     <string name="registration_repeat_password_hint">Повторите пароль (обязательно)</string>
     <string name="cancel_button_text">Отмена</string>
+    <string name="login_checkbox">Запомнить логин и пароль</string>
     <array name="gender">
         <item>Мужской</item>
         <item>Женский</item>
