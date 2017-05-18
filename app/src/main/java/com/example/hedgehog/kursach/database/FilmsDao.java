@@ -23,12 +23,14 @@ public class FilmsDao extends AbstractDao<Films, Long> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
+        public final static Property FilmId = new Property(0, Long.class, "filmId", true, "_id");
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
-        public final static Property Descriprion = new Property(2, String.class, "descriprion", false, "DESCRIPRION");
-        public final static Property Duration = new Property(3, int.class, "duration", false, "DURATION");
-        public final static Property AgeLimit = new Property(4, int.class, "ageLimit", false, "AGE_LIMIT");
-        public final static Property Price = new Property(5, int.class, "price", false, "PRICE");
+        public final static Property Genres = new Property(2, String.class, "genres", false, "GENRES");
+        public final static Property Description = new Property(3, String.class, "description", false, "DESCRIPTION");
+        public final static Property Year = new Property(4, int.class, "year", false, "YEAR");
+        public final static Property AgeLimit = new Property(5, int.class, "ageLimit", false, "AGE_LIMIT");
+        public final static Property Price = new Property(6, int.class, "price", false, "PRICE");
+        public final static Property ImageUrl = new Property(7, String.class, "imageUrl", false, "IMAGE_URL");
     }
 
 
@@ -44,19 +46,19 @@ public class FilmsDao extends AbstractDao<Films, Long> {
      * Creates the underlying database table.
      */
     public static void createTable(Database db, boolean ifNotExists) {
-        String constraint = ifNotExists ? "IF NOT EXISTS " : "";
+        String constraint = ifNotExists ? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"FILMS\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: filmId
                 "\"NAME\" TEXT NOT NULL ," + // 1: name
-                "\"DESCRIPRION\" TEXT NOT NULL ," + // 2: descriprion
-                "\"DURATION\" INTEGER NOT NULL ," + // 3: duration
-                "\"AGE_LIMIT\" INTEGER NOT NULL ," + // 4: ageLimit
-                "\"PRICE\" INTEGER NOT NULL );"); // 5: price
+                "\"GENRES\" TEXT," + // 2: genres
+                "\"DESCRIPTION\" TEXT NOT NULL ," + // 3: description
+                "\"YEAR\" INTEGER NOT NULL ," + // 4: year
+                "\"AGE_LIMIT\" INTEGER NOT NULL ," + // 5: ageLimit
+                "\"PRICE\" INTEGER NOT NULL ," + // 6: price
+                "\"IMAGE_URL\" TEXT);"); // 7: imageUrl
     }
 
-    /**
-     * Drops the underlying database table.
-     */
+    /** Drops the underlying database table. */
     public static void dropTable(Database db, boolean ifExists) {
         String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "\"FILMS\"";
         db.execSQL(sql);
@@ -66,70 +68,94 @@ public class FilmsDao extends AbstractDao<Films, Long> {
     protected final void bindValues(DatabaseStatement stmt, Films entity) {
         stmt.clearBindings();
 
-        Long id = entity.getId();
-        if (id != null) {
-            stmt.bindLong(1, id);
+        Long filmId = entity.getFilmId();
+        if (filmId != null) {
+            stmt.bindLong(1, filmId);
         }
         stmt.bindString(2, entity.getName());
-        stmt.bindString(3, entity.getDescriprion());
-        stmt.bindLong(4, entity.getDuration());
-        stmt.bindLong(5, entity.getAgeLimit());
-        stmt.bindLong(6, entity.getPrice());
+
+        String genres = entity.getGenres();
+        if (genres != null) {
+            stmt.bindString(3, genres);
+        }
+        stmt.bindString(4, entity.getDescription());
+        stmt.bindLong(5, entity.getYear());
+        stmt.bindLong(6, entity.getAgeLimit());
+        stmt.bindLong(7, entity.getPrice());
+
+        String imageUrl = entity.getImageUrl();
+        if (imageUrl != null) {
+            stmt.bindString(8, imageUrl);
+        }
     }
 
     @Override
     protected final void bindValues(SQLiteStatement stmt, Films entity) {
         stmt.clearBindings();
 
-        Long id = entity.getId();
-        if (id != null) {
-            stmt.bindLong(1, id);
+        Long filmId = entity.getFilmId();
+        if (filmId != null) {
+            stmt.bindLong(1, filmId);
         }
         stmt.bindString(2, entity.getName());
-        stmt.bindString(3, entity.getDescriprion());
-        stmt.bindLong(4, entity.getDuration());
-        stmt.bindLong(5, entity.getAgeLimit());
-        stmt.bindLong(6, entity.getPrice());
+
+        String genres = entity.getGenres();
+        if (genres != null) {
+            stmt.bindString(3, genres);
+        }
+        stmt.bindString(4, entity.getDescription());
+        stmt.bindLong(5, entity.getYear());
+        stmt.bindLong(6, entity.getAgeLimit());
+        stmt.bindLong(7, entity.getPrice());
+
+        String imageUrl = entity.getImageUrl();
+        if (imageUrl != null) {
+            stmt.bindString(8, imageUrl);
+        }
     }
 
     @Override
     public Long readKey(Cursor cursor, int offset) {
         return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
-    }
+    }    
 
     @Override
     public Films readEntity(Cursor cursor, int offset) {
         Films entity = new Films( //
-                cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
+                cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // filmId
                 cursor.getString(offset + 1), // name
-                cursor.getString(offset + 2), // descriprion
-                cursor.getInt(offset + 3), // duration
-                cursor.getInt(offset + 4), // ageLimit
-                cursor.getInt(offset + 5) // price
+                cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // genres
+                cursor.getString(offset + 3), // description
+                cursor.getInt(offset + 4), // year
+                cursor.getInt(offset + 5), // ageLimit
+                cursor.getInt(offset + 6), // price
+                cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7) // imageUrl
         );
         return entity;
     }
-
+     
     @Override
     public void readEntity(Cursor cursor, Films entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
+        entity.setFilmId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setName(cursor.getString(offset + 1));
-        entity.setDescriprion(cursor.getString(offset + 2));
-        entity.setDuration(cursor.getInt(offset + 3));
-        entity.setAgeLimit(cursor.getInt(offset + 4));
-        entity.setPrice(cursor.getInt(offset + 5));
-    }
-
+        entity.setGenres(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setDescription(cursor.getString(offset + 3));
+        entity.setYear(cursor.getInt(offset + 4));
+        entity.setAgeLimit(cursor.getInt(offset + 5));
+        entity.setPrice(cursor.getInt(offset + 6));
+        entity.setImageUrl(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+     }
+    
     @Override
     protected final Long updateKeyAfterInsert(Films entity, long rowId) {
-        entity.setId(rowId);
+        entity.setFilmId(rowId);
         return rowId;
     }
-
+    
     @Override
     public Long getKey(Films entity) {
         if (entity != null) {
-            return entity.getId();
+            return entity.getFilmId();
         } else {
             return null;
         }
@@ -137,12 +163,12 @@ public class FilmsDao extends AbstractDao<Films, Long> {
 
     @Override
     public boolean hasKey(Films entity) {
-        return entity.getId() != null;
+        return entity.getFilmId() != null;
     }
 
     @Override
     protected final boolean isEntityUpdateable() {
         return true;
     }
-
+    
 }

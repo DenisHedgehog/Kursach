@@ -11,25 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <uses-permission android:name="android.permission.INTERNET" />
         <activity android:name=".MainActivity">
-
             <intent-filter>
-                <uses-permission android:name="android.permission.INTERNET" />
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-
             </intent-filter>
-
         </activity>
 
-        <meta-data
-            android:name="AA_DB_NAME"
-            android:value="OnlineCinema" />
-        <meta-data
-            android:name="AA_DB_VERSION"
-            android:value="1" />
+        <uses-permission android:name="android.permission.INTERNET" />
+
+        <activity android:name=".FilmDetailActivity"></activity>
     </application>
 
 </manifest>

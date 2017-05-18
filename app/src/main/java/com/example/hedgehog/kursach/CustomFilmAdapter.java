@@ -11,23 +11,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hedgehog.kursach.database.Films;
+
 import java.util.ArrayList;
 
 /**
  * Created by hedgehog on 18.04.17.
  */
 
-class CustomFilmAdapter extends ArrayAdapter<Film> implements View.OnClickListener {
+class CustomFilmAdapter extends ArrayAdapter<Films> implements View.OnClickListener {
 
-    private ArrayList<Film> getFilms() {
+    private ArrayList<Films> getFilms() {
         return films;
     }
 
-    private void setFilms(ArrayList<Film> films) {
+    private void setFilms(ArrayList<Films> films) {
         this.films = films;
     }
 
-    private ArrayList<Film> films;
+    private ArrayList<Films> films;
     Context context;
 
     private static class ViewHolder {
@@ -37,7 +39,7 @@ class CustomFilmAdapter extends ArrayAdapter<Film> implements View.OnClickListen
     }
 
 
-    CustomFilmAdapter(Context context, ArrayList<Film> films) {
+    CustomFilmAdapter(Context context, ArrayList<Films> films) {
         super(context, R.layout.film_row, films);
         setFilms(films);
         this.context = context;
@@ -58,7 +60,7 @@ class CustomFilmAdapter extends ArrayAdapter<Film> implements View.OnClickListen
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View rowView;
-        Film film = getItem(position);
+        Films film = getItem(position);
         ViewHolder viewHolder;
         rowView = convertView;
 
@@ -74,7 +76,7 @@ class CustomFilmAdapter extends ArrayAdapter<Film> implements View.OnClickListen
             viewHolder = (ViewHolder) rowView.getTag();
         }
 
-        viewHolder.descriptionTextView.setText(film.getDescription());
+        viewHolder.descriptionTextView.setText("filmId = " + film.getId());
         viewHolder.nameTextView.setText(film.getName());
 
         return rowView;

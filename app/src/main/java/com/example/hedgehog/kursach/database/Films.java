@@ -13,30 +13,37 @@ import org.greenrobot.greendao.annotation.Generated;
 public class Films {
 
     @Id(autoincrement = true)
-    private Long id;
+    private Long filmId;
 
     @NotNull
     private String name;
 
-    @NotNull
-    private String descriprion;
+    private String genres;
 
-    private int duration;
+    @NotNull
+    private String description;
+
+    private int year;
 
     @NotNull
     private int ageLimit;
 
     private int price;
 
-    @Generated(hash = 1306674478)
-    public Films(Long id, @NotNull String name, @NotNull String descriprion,
-                 int duration, int ageLimit, int price) {
-        this.id = id;
+    private String imageUrl;
+
+    @Generated(hash = 563905788)
+    public Films(Long filmId, @NotNull String name, String genres,
+                 @NotNull String description, int year, int ageLimit, int price,
+                 String imageUrl) {
+        this.filmId = filmId;
         this.name = name;
-        this.descriprion = descriprion;
-        this.duration = duration;
+        this.genres = genres;
+        this.description = description;
+        this.year = year;
         this.ageLimit = ageLimit;
         this.price = price;
+        this.imageUrl = imageUrl;
     }
 
     @Generated(hash = 1270431773)
@@ -44,11 +51,11 @@ public class Films {
     }
 
     public Long getId() {
-        return this.id;
+        return this.filmId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.filmId = id;
     }
 
     public String getName() {
@@ -59,20 +66,8 @@ public class Films {
         this.name = name;
     }
 
-    public String getDescriprion() {
-        return this.descriprion;
-    }
-
-    public void setDescriprion(String descriprion) {
-        this.descriprion = descriprion;
-    }
-
-    public int getDuration() {
-        return this.duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
+    public void setDescriprion(String description) {
+        this.description = description;
     }
 
     public int getAgeLimit() {
@@ -90,5 +85,46 @@ public class Films {
     public void setPrice(int price) {
         this.price = price;
     }
+
+    public Long getFilmId() {
+        return this.filmId;
+    }
+
+    public void setFilmId(Long filmId) {
+        this.filmId = filmId;
+    }
+
+    public String getImageUrl() {
+        return this.imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public int getYear() {
+        return this.year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public String getGenres() {
+        return this.genres;
+    }
+
+    public void setGenres(String genres) {
+        this.genres = genres;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
 
 }

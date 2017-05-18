@@ -42,7 +42,7 @@ public class UsersDao extends AbstractDao<Users, Long> {
      * Creates the underlying database table.
      */
     public static void createTable(Database db, boolean ifNotExists) {
-        String constraint = ifNotExists ? "IF NOT EXISTS " : "";
+        String constraint = ifNotExists ? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"USERS\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: userId
                 "\"EMAIL\" TEXT NOT NULL ," + // 1: email
@@ -50,9 +50,7 @@ public class UsersDao extends AbstractDao<Users, Long> {
                 "\"AGE\" INTEGER NOT NULL );"); // 3: age
     }
 
-    /**
-     * Drops the underlying database table.
-     */
+    /** Drops the underlying database table. */
     public static void dropTable(Database db, boolean ifExists) {
         String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "\"USERS\"";
         db.execSQL(sql);
@@ -61,7 +59,7 @@ public class UsersDao extends AbstractDao<Users, Long> {
     @Override
     protected final void bindValues(DatabaseStatement stmt, Users entity) {
         stmt.clearBindings();
-
+ 
         Long userId = entity.getUserId();
         if (userId != null) {
             stmt.bindLong(1, userId);
@@ -74,7 +72,7 @@ public class UsersDao extends AbstractDao<Users, Long> {
     @Override
     protected final void bindValues(SQLiteStatement stmt, Users entity) {
         stmt.clearBindings();
-
+ 
         Long userId = entity.getUserId();
         if (userId != null) {
             stmt.bindLong(1, userId);
@@ -87,7 +85,7 @@ public class UsersDao extends AbstractDao<Users, Long> {
     @Override
     public Long readKey(Cursor cursor, int offset) {
         return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
-    }
+    }    
 
     @Override
     public Users readEntity(Cursor cursor, int offset) {
@@ -99,21 +97,21 @@ public class UsersDao extends AbstractDao<Users, Long> {
         );
         return entity;
     }
-
+     
     @Override
     public void readEntity(Cursor cursor, Users entity, int offset) {
         entity.setUserId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setEmail(cursor.getString(offset + 1));
         entity.setPassword(cursor.getString(offset + 2));
         entity.setAge(cursor.getInt(offset + 3));
-    }
-
+     }
+    
     @Override
     protected final Long updateKeyAfterInsert(Users entity, long rowId) {
         entity.setUserId(rowId);
         return rowId;
     }
-
+    
     @Override
     public Long getKey(Users entity) {
         if (entity != null) {
@@ -132,5 +130,5 @@ public class UsersDao extends AbstractDao<Users, Long> {
     protected final boolean isEntityUpdateable() {
         return true;
     }
-
+    
 }

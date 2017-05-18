@@ -40,15 +40,13 @@ public class OperationsDao extends AbstractDao<Operations, Long> {
      * Creates the underlying database table.
      */
     public static void createTable(Database db, boolean ifNotExists) {
-        String constraint = ifNotExists ? "IF NOT EXISTS " : "";
+        String constraint = ifNotExists ? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"OPERATIONS\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: operationId
                 "\"DESCRIPTION\" TEXT NOT NULL );"); // 1: description
     }
 
-    /**
-     * Drops the underlying database table.
-     */
+    /** Drops the underlying database table. */
     public static void dropTable(Database db, boolean ifExists) {
         String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "\"OPERATIONS\"";
         db.execSQL(sql);
@@ -57,7 +55,7 @@ public class OperationsDao extends AbstractDao<Operations, Long> {
     @Override
     protected final void bindValues(DatabaseStatement stmt, Operations entity) {
         stmt.clearBindings();
-
+ 
         Long operationId = entity.getOperationId();
         if (operationId != null) {
             stmt.bindLong(1, operationId);
@@ -68,7 +66,7 @@ public class OperationsDao extends AbstractDao<Operations, Long> {
     @Override
     protected final void bindValues(SQLiteStatement stmt, Operations entity) {
         stmt.clearBindings();
-
+ 
         Long operationId = entity.getOperationId();
         if (operationId != null) {
             stmt.bindLong(1, operationId);
@@ -79,7 +77,7 @@ public class OperationsDao extends AbstractDao<Operations, Long> {
     @Override
     public Long readKey(Cursor cursor, int offset) {
         return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
-    }
+    }    
 
     @Override
     public Operations readEntity(Cursor cursor, int offset) {
@@ -89,19 +87,19 @@ public class OperationsDao extends AbstractDao<Operations, Long> {
         );
         return entity;
     }
-
+     
     @Override
     public void readEntity(Cursor cursor, Operations entity, int offset) {
         entity.setOperationId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setDescription(cursor.getString(offset + 1));
-    }
-
+     }
+    
     @Override
     protected final Long updateKeyAfterInsert(Operations entity, long rowId) {
         entity.setOperationId(rowId);
         return rowId;
     }
-
+    
     @Override
     public Long getKey(Operations entity) {
         if (entity != null) {
@@ -120,5 +118,5 @@ public class OperationsDao extends AbstractDao<Operations, Long> {
     protected final boolean isEntityUpdateable() {
         return true;
     }
-
+    
 }

@@ -2,7 +2,6 @@ package com.example.hedgehog.kursach.database;
 
 import java.util.List;
 import java.util.ArrayList;
-
 import android.database.Cursor;
 import android.database.sqlite.SQLiteStatement;
 
@@ -49,7 +48,7 @@ public class CommentsDao extends AbstractDao<Comments, Long> {
      * Creates the underlying database table.
      */
     public static void createTable(Database db, boolean ifNotExists) {
-        String constraint = ifNotExists ? "IF NOT EXISTS " : "";
+        String constraint = ifNotExists ? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"COMMENTS\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: commentId
                 "\"COMMENT\" TEXT NOT NULL ," + // 1: comment
@@ -57,9 +56,7 @@ public class CommentsDao extends AbstractDao<Comments, Long> {
                 "\"FILM_ID\" INTEGER);"); // 3: filmId
     }
 
-    /**
-     * Drops the underlying database table.
-     */
+    /** Drops the underlying database table. */
     public static void dropTable(Database db, boolean ifExists) {
         String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "\"COMMENTS\"";
         db.execSQL(sql);
@@ -68,18 +65,18 @@ public class CommentsDao extends AbstractDao<Comments, Long> {
     @Override
     protected final void bindValues(DatabaseStatement stmt, Comments entity) {
         stmt.clearBindings();
-
+ 
         Long commentId = entity.getCommentId();
         if (commentId != null) {
             stmt.bindLong(1, commentId);
         }
         stmt.bindString(2, entity.getComment());
-
+ 
         Long userId = entity.getUserId();
         if (userId != null) {
             stmt.bindLong(3, userId);
         }
-
+ 
         Long filmId = entity.getFilmId();
         if (filmId != null) {
             stmt.bindLong(4, filmId);
@@ -89,18 +86,18 @@ public class CommentsDao extends AbstractDao<Comments, Long> {
     @Override
     protected final void bindValues(SQLiteStatement stmt, Comments entity) {
         stmt.clearBindings();
-
+ 
         Long commentId = entity.getCommentId();
         if (commentId != null) {
             stmt.bindLong(1, commentId);
         }
         stmt.bindString(2, entity.getComment());
-
+ 
         Long userId = entity.getUserId();
         if (userId != null) {
             stmt.bindLong(3, userId);
         }
-
+ 
         Long filmId = entity.getFilmId();
         if (filmId != null) {
             stmt.bindLong(4, filmId);
@@ -116,7 +113,7 @@ public class CommentsDao extends AbstractDao<Comments, Long> {
     @Override
     public Long readKey(Cursor cursor, int offset) {
         return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
-    }
+    }    
 
     @Override
     public Comments readEntity(Cursor cursor, int offset) {
@@ -128,21 +125,21 @@ public class CommentsDao extends AbstractDao<Comments, Long> {
         );
         return entity;
     }
-
+     
     @Override
     public void readEntity(Cursor cursor, Comments entity, int offset) {
         entity.setCommentId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setComment(cursor.getString(offset + 1));
         entity.setUserId(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
         entity.setFilmId(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
-    }
-
+     }
+    
     @Override
     protected final Long updateKeyAfterInsert(Comments entity, long rowId) {
         entity.setCommentId(rowId);
         return rowId;
     }
-
+    
     @Override
     public Long getKey(Comments entity) {
         if (entity != null) {
@@ -161,7 +158,7 @@ public class CommentsDao extends AbstractDao<Comments, Long> {
     protected final boolean isEntityUpdateable() {
         return true;
     }
-
+    
     private String selectDeep;
 
     protected String getSelectDeep() {
@@ -180,7 +177,7 @@ public class CommentsDao extends AbstractDao<Comments, Long> {
         }
         return selectDeep;
     }
-
+    
     protected Comments loadCurrentDeep(Cursor cursor, boolean lock) {
         Comments entity = loadCurrent(cursor, 0, lock);
         int offset = getAllColumns().length;
@@ -192,7 +189,7 @@ public class CommentsDao extends AbstractDao<Comments, Long> {
         Films film = loadCurrentOther(daoSession.getFilmsDao(), cursor, offset);
         entity.setFilm(film);
 
-        return entity;
+        return entity;    
     }
 
     public Comments loadDeep(Long key) {
@@ -206,9 +203,9 @@ public class CommentsDao extends AbstractDao<Comments, Long> {
         SqlUtils.appendColumnsEqValue(builder, "T", getPkColumns());
         String sql = builder.toString();
 
-        String[] keyArray = new String[]{key.toString()};
+        String[] keyArray = new String[]{key.toString() };
         Cursor cursor = db.rawQuery(sql, keyArray);
-
+        
         try {
             boolean available = cursor.moveToFirst();
             if (!available) {
@@ -222,13 +219,11 @@ public class CommentsDao extends AbstractDao<Comments, Long> {
         }
     }
 
-    /**
-     * Reads all available rows from the given cursor and returns a list of new ImageTO objects.
-     */
+    /** Reads all available rows from the given cursor and returns a list of new ImageTO objects. */
     public List<Comments> loadAllDeepFromCursor(Cursor cursor) {
         int count = cursor.getCount();
         List<Comments> list = new ArrayList<Comments>(count);
-
+        
         if (cursor.moveToFirst()) {
             if (identityScope != null) {
                 identityScope.lock();
@@ -246,7 +241,7 @@ public class CommentsDao extends AbstractDao<Comments, Long> {
         }
         return list;
     }
-
+    
     protected List<Comments> loadDeepAllAndCloseCursor(Cursor cursor) {
         try {
             return loadAllDeepFromCursor(cursor);
@@ -256,12 +251,10 @@ public class CommentsDao extends AbstractDao<Comments, Long> {
     }
 
 
-    /**
-     * A raw-style query where you can pass any WHERE clause and arguments.
-     */
+    /** A raw-style query where you can pass any WHERE clause and arguments. */
     public List<Comments> queryDeep(String where, String... selectionArg) {
         Cursor cursor = db.rawQuery(getSelectDeep() + where, selectionArg);
         return loadDeepAllAndCloseCursor(cursor);
     }
-
+ 
 }

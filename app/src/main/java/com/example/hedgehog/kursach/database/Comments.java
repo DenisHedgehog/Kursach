@@ -148,11 +148,11 @@ public class Comments {
     /**
      * called by internal mechanisms, do not call yourself.
      */
-    @Generated(hash = 2051916266)
+    @Generated(hash = 1008618849)
     public void setFilm(Films film) {
         synchronized (this) {
             this.film = film;
-            filmId = film == null ? null : film.getId();
+            filmId = film == null ? null : film.getFilmId();
             film__resolvedKey = filmId;
         }
     }

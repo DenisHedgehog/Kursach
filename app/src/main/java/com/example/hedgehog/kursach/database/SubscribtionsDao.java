@@ -41,7 +41,7 @@ public class SubscribtionsDao extends AbstractDao<Subscribtions, Void> {
      * Creates the underlying database table.
      */
     public static void createTable(Database db, boolean ifNotExists) {
-        String constraint = ifNotExists ? "IF NOT EXISTS " : "";
+        String constraint = ifNotExists ? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"SUBSCRIBTIONS\" (" + //
                 "\"SUBSCRIBTION_NAME\" TEXT," + // 0: subscribtionName
                 "\"DESCRIPTION\" TEXT NOT NULL ," + // 1: description
@@ -51,9 +51,7 @@ public class SubscribtionsDao extends AbstractDao<Subscribtions, Void> {
                 " (\"SUBSCRIBTION_NAME\" ASC);");
     }
 
-    /**
-     * Drops the underlying database table.
-     */
+    /** Drops the underlying database table. */
     public static void dropTable(Database db, boolean ifExists) {
         String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "\"SUBSCRIBTIONS\"";
         db.execSQL(sql);
@@ -62,7 +60,7 @@ public class SubscribtionsDao extends AbstractDao<Subscribtions, Void> {
     @Override
     protected final void bindValues(DatabaseStatement stmt, Subscribtions entity) {
         stmt.clearBindings();
-
+ 
         String subscribtionName = entity.getSubscribtionName();
         if (subscribtionName != null) {
             stmt.bindString(1, subscribtionName);
@@ -74,7 +72,7 @@ public class SubscribtionsDao extends AbstractDao<Subscribtions, Void> {
     @Override
     protected final void bindValues(SQLiteStatement stmt, Subscribtions entity) {
         stmt.clearBindings();
-
+ 
         String subscribtionName = entity.getSubscribtionName();
         if (subscribtionName != null) {
             stmt.bindString(1, subscribtionName);
@@ -86,7 +84,7 @@ public class SubscribtionsDao extends AbstractDao<Subscribtions, Void> {
     @Override
     public Void readKey(Cursor cursor, int offset) {
         return null;
-    }
+    }    
 
     @Override
     public Subscribtions readEntity(Cursor cursor, int offset) {
@@ -97,20 +95,20 @@ public class SubscribtionsDao extends AbstractDao<Subscribtions, Void> {
         );
         return entity;
     }
-
+     
     @Override
     public void readEntity(Cursor cursor, Subscribtions entity, int offset) {
         entity.setSubscribtionName(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
         entity.setDescription(cursor.getString(offset + 1));
         entity.setPrice(cursor.getInt(offset + 2));
-    }
-
+     }
+    
     @Override
     protected final Void updateKeyAfterInsert(Subscribtions entity, long rowId) {
         // Unsupported or missing PK type
         return null;
     }
-
+    
     @Override
     public Void getKey(Subscribtions entity) {
         return null;
@@ -126,5 +124,5 @@ public class SubscribtionsDao extends AbstractDao<Subscribtions, Void> {
     protected final boolean isEntityUpdateable() {
         return true;
     }
-
+    
 }
