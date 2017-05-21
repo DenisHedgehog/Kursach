@@ -21,7 +21,14 @@
 
         <uses-permission android:name="android.permission.INTERNET" />
 
-        <activity android:name=".FilmDetailActivity"></activity>
+        <activity android:name=".FilmDetailActivity" />
+        <activity android:name=".UserAccountActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".RegistrationActivity" />
+        <activity
+            android:name=".NavigationDrawerMainActivity"
+            android:label="@string/title_activity_navigation_drawer_main"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

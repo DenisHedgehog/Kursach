@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:layout_width="100pt"
+        android:layout_width="125pt"
         android:layout_height="wrap_content"
         android:hint="@string/login_hint"
         android:id="@+id/login_edit_id"
@@ -17,7 +17,7 @@
         android:fontFamily="sans-serif"/>
 
     <EditText
-        android:layout_width="100pt"
+        android:layout_width="125pt"
         android:layout_height="wrap_content"
         android:hint="@string/password_hint"
         android:id="@+id/password_edit_id"
@@ -32,21 +32,6 @@
         android:text="@string/login_button_text"
         android:layout_gravity="center"/>
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/login_checkbox" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/forgot_password_text"
-        android:textColor="@color/blueClickableColor"
-        android:textSize="9pt"
-        android:layout_margin="3pt"
-        android:id="@+id/login_forgot_password_id" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,7 +39,7 @@
         android:text="@string/create_account_text"
         android:textColor="@color/blueClickableColor"
         android:textSize="9pt"
-        android:layout_margin="3pt"/>
-
+        android:layout_margin="3pt"
+        android:id="@+id/registation_text_view_id" />
 
 </LinearLayout>

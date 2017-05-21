@@ -42,12 +42,13 @@ public class FilmDetailActivity extends AppCompatActivity {
         TextView filmDescription = (TextView) findViewById(R.id.film_description);
 
 
+
         Picasso.with(getBaseContext())
                 .load(film.getImageUrl())
                 .resize(900, 1440)
                 .into(filmImageView);
 
-        filmYear.setText(film.getName() + " (" + film.getYear() + ")");
+        filmYear.setText(film.getName() + " (" + film.getAgeLimit() + "+)");
         filmGenres.setText("Жанры: " + film.getGenres());
 //        filmName.setText(film.getName());
         filmDescription.setText("Описание: " + film.getDescription());

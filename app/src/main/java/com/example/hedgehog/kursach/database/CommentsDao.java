@@ -218,7 +218,7 @@ public class CommentsDao extends AbstractDao<Comments, Long> {
             cursor.close();
         }
     }
-
+    
     /** Reads all available rows from the given cursor and returns a list of new ImageTO objects. */
     public List<Comments> loadAllDeepFromCursor(Cursor cursor) {
         int count = cursor.getCount();
@@ -249,7 +249,7 @@ public class CommentsDao extends AbstractDao<Comments, Long> {
             cursor.close();
         }
     }
-
+    
 
     /** A raw-style query where you can pass any WHERE clause and arguments. */
     public List<Comments> queryDeep(String where, String... selectionArg) {

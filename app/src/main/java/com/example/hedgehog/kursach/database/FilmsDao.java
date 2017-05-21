@@ -67,13 +67,13 @@ public class FilmsDao extends AbstractDao<Films, Long> {
     @Override
     protected final void bindValues(DatabaseStatement stmt, Films entity) {
         stmt.clearBindings();
-
+ 
         Long filmId = entity.getFilmId();
         if (filmId != null) {
             stmt.bindLong(1, filmId);
         }
         stmt.bindString(2, entity.getName());
-
+ 
         String genres = entity.getGenres();
         if (genres != null) {
             stmt.bindString(3, genres);
@@ -82,7 +82,7 @@ public class FilmsDao extends AbstractDao<Films, Long> {
         stmt.bindLong(5, entity.getYear());
         stmt.bindLong(6, entity.getAgeLimit());
         stmt.bindLong(7, entity.getPrice());
-
+ 
         String imageUrl = entity.getImageUrl();
         if (imageUrl != null) {
             stmt.bindString(8, imageUrl);
@@ -92,13 +92,13 @@ public class FilmsDao extends AbstractDao<Films, Long> {
     @Override
     protected final void bindValues(SQLiteStatement stmt, Films entity) {
         stmt.clearBindings();
-
+ 
         Long filmId = entity.getFilmId();
         if (filmId != null) {
             stmt.bindLong(1, filmId);
         }
         stmt.bindString(2, entity.getName());
-
+ 
         String genres = entity.getGenres();
         if (genres != null) {
             stmt.bindString(3, genres);
@@ -107,7 +107,7 @@ public class FilmsDao extends AbstractDao<Films, Long> {
         stmt.bindLong(5, entity.getYear());
         stmt.bindLong(6, entity.getAgeLimit());
         stmt.bindLong(7, entity.getPrice());
-
+ 
         String imageUrl = entity.getImageUrl();
         if (imageUrl != null) {
             stmt.bindString(8, imageUrl);

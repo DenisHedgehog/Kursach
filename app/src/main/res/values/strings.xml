@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Курсовая работа</string>
-    <string name="login_hint">Логин</string>
+    <string name="login_hint">Адрес электронной почты</string>
     <string name="password_hint">Пароль</string>
     <string name="login_button_text">Войти</string>
     <string name="forgot_password_text">Забыли пароль?</string>
@@ -14,9 +14,20 @@
     <string name="registration_age_hint">Возраст (обязательно)</string>
     <string name="registration_repeat_password_hint">Повторите пароль (обязательно)</string>
     <string name="cancel_button_text">Отмена</string>
-    <string name="login_checkbox">Запомнить логин и пароль</string>
+    <string name="login_checkbox">Запомнить почту и пароль</string>
+    <string name="account_title">Аккаунт</string>
+    <string name="user_favorite_films">Избранные фильмы</string>
+    <string name="user_watched_films">Просмотренные фильмы</string>
+    <string name="change_password">Изменить пароль</string>
+    <string name="exit_account">Выйти из аккаунта</string>
     <array name="gender">
         <item>Мужской</item>
         <item>Женский</item>
     </array>
+    <string name="title_activity_navigation_drawer_main">NavigationDrawerMainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
