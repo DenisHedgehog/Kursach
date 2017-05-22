@@ -24,10 +24,36 @@
         <item>Мужской</item>
         <item>Женский</item>
     </array>
+
+    <array name="list_of_genres">
+        <item>все жанры</item>
+        <item>комедия</item>
+        <item>драма</item>
+        <item>мелодрама</item>
+        <item>боевик</item>
+        <item>фэнтези</item>
+        <item>триллер</item>
+        <item>криминал</item>
+        <item>приключения</item>
+        <item>мультфильм</item>
+        <item>фантастика</item>
+        <item>семейный</item>
+        <item>военный</item>
+        <item>спорт</item>
+        <item>музыка</item>
+        <item>детектив</item>
+        <item>биография</item>
+        <item>история</item>
+
+    </array>
+
     <string name="title_activity_navigation_drawer_main">NavigationDrawerMainActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="search_films_by_genres">Показать фильмы</string>
+    <string name="search_films_by_genres_hint">Введите жанр (оставить пустым, чтобы увидеть все фильмы)</string>
+    <string name="genres_title">Жанры:</string>
 </resources>

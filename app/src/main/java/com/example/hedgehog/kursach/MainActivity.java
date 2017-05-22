@@ -10,7 +10,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,10 +61,11 @@ public class MainActivity extends AppCompatActivity {
 
         helper = new DaoMaster.DevOpenHelper(this, "onlineCinemaDatabase", null);
         db = helper.getWritableDatabase();
+        Toast.makeText(this, "Path: \n" + db.getPath(), Toast.LENGTH_LONG).show();
 //        helper.onUpgrade(helper.getReadableDb(), 6, 7);
         daoMaster = new DaoMaster(db);
         DaoSession daoSession = daoMaster.newSession();
-        FilmsDao filmsDao = daoSession.getFilmsDao();
+        final FilmsDao filmsDao = daoSession.getFilmsDao();
 //        filmsDao.deleteAll();
 
         UsersDao usersDao = daoSession.getUsersDao();
@@ -96,19 +102,102 @@ public class MainActivity extends AppCompatActivity {
 //        textView.setText(sa);
 
 
-//        Films films = new Films();
-//        films.setName("Test name");
-//        films.setDescriprion("Test description");
-//        films.setAgeLimit(13);
 
-//        TextView textView = (TextView) findViewById(R.id.test_text_view);
+        Spinner genresSpinner = (Spinner) findViewById(R.id.genres_spinner);
 
-//        daoSession.insert(films);
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.list_of_genres, android.R.layout.simple_spinner_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        genresSpinner.setAdapter(spinnerAdapter);
 
-//        Films f = new Films(null, "Name test", "test genres", "Description text", 2007, 16, 0, null);
-//        daoSession.insert(f);
+        genresSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-        final ArrayList<Films> filmes = (ArrayList<Films>) filmsDao.loadAll();
+            ArrayList<Films> filmes;
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                switch (parent.getItemAtPosition(position).toString()){
+
+                    case "все жанры":
+                        filmes = (ArrayList<Films>) filmsDao.loadAll();
+                        break;
+                    case "драма":
+                        filmes = (ArrayList<Films>) filmsDao.queryBuilder().where(FilmsDao.Properties.Genres
+                                .like("%" + parent.getItemAtPosition(position).toString() + "%"),
+                                FilmsDao.Properties.Genres.notIn(filmsDao.queryBuilder().where(FilmsDao.Properties.Genres.like("%мелодрама%"),
+                                        FilmsDao.Properties.Genres.notIn(filmsDao.queryBuilder().where(FilmsDao.Properties.Genres.like("%драма%")).list())).list())).list();
+                        break;
+                    default:
+                        filmes = (ArrayList<Films>) filmsDao.queryBuilder().where(FilmsDao.Properties.Genres.like("%" + parent.getItemAtPosition(position).toString() + "%")).list();
+                }
+
+//                for (Films f : filmes) {
+//                    f.setAgeLimit(getRandomAgeLimit());
+//                    f.setYear(getRandomYear());
+//                    filmsDao.update(f);
+//                }
+
+                setCustomFilmAdapter(new CustomFilmAdapter(getApplicationContext(), filmes));
+
+//        Toast toast1 = Toast.makeText(MainActivity.this, customFilmAdapter.toString(), Toast.LENGTH_LONG);
+//        toast1.show();
+
+                try {
+                    listView = (ListView) findViewById(R.id.film_list_id);
+//            Toast toast1 = Toast.makeText(MainActivity.this, listView.toString(), Toast.LENGTH_LONG);
+//            toast1.show();
+                    listView.setAdapter(getCustomFilmAdapter());
+                    Utils.setListViewHeightBasedOnChildren(listView);
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Intent filmDetails = new Intent(getApplicationContext(), FilmDetailActivity.class);
+                            filmDetails.putExtra("filmId", filmes.get(position).getFilmId());
+                            startActivity(filmDetails);
+                        }
+                    });
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast toast = Toast.makeText(MainActivity.this, "WTF, ADAPTER?" + e, Toast.LENGTH_LONG);
+                    toast.show();
+                }
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                setCustomFilmAdapter(new CustomFilmAdapter(getApplicationContext(), filmes));
+
+//        Toast toast1 = Toast.makeText(MainActivity.this, customFilmAdapter.toString(), Toast.LENGTH_LONG);
+//        toast1.show();
+
+                try {
+                    listView = (ListView) findViewById(R.id.film_list_id);
+//            Toast toast1 = Toast.makeText(MainActivity.this, listView.toString(), Toast.LENGTH_LONG);
+//            toast1.show();
+                    listView.setAdapter(getCustomFilmAdapter());
+                    Utils.setListViewHeightBasedOnChildren(listView);
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Intent filmDetails = new Intent(getApplicationContext(), FilmDetailActivity.class);
+                            filmDetails.putExtra("filmId", filmes.get(position).getFilmId());
+                            startActivity(filmDetails);
+                        }
+                    });
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast toast = Toast.makeText(MainActivity.this, "WTF, ADAPTER?" + e, Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            }
+        });
+
+
+
 //        ConnectToDB connectToDB = null;
 //        try {
 //            connectToDB = new ConnectToDB(filmes);
@@ -120,39 +209,17 @@ public class MainActivity extends AppCompatActivity {
 //        } catch (ExecutionException e) {
 //            e.printStackTrace();
 //        }
-
-//        textView.setText("Count = " + filmes.size());
-
+//
+////        textView.setText("Count = " + filmes.size());
+//
 //        for (Films f1 : filmes) {
 //            daoSession.insert(f1);
 //        }
 
 
-        setCustomFilmAdapter(new CustomFilmAdapter(getApplicationContext(), filmes));
 
-//        Toast toast1 = Toast.makeText(MainActivity.this, customFilmAdapter.toString(), Toast.LENGTH_LONG);
-//        toast1.show();
 
-        try {
-            listView = (ListView) findViewById(R.id.film_list_id);
-//            Toast toast1 = Toast.makeText(MainActivity.this, listView.toString(), Toast.LENGTH_LONG);
-//            toast1.show();
-            listView.setAdapter(getCustomFilmAdapter());
-            Utils.setListViewHeightBasedOnChildren(listView);
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent filmDetails = new Intent(getApplicationContext(), FilmDetailActivity.class);
-                    filmDetails.putExtra("filmId", filmes.get(position).getFilmId());
-                    startActivity(filmDetails);
-                }
-            });
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast toast = Toast.makeText(MainActivity.this, "WTF, ADAPTER?" + e, Toast.LENGTH_LONG);
-            toast.show();
-        }
     }
 
     @Override
@@ -203,5 +270,17 @@ public class MainActivity extends AppCompatActivity {
     public int generateRandomAge(int[] array) {
         return getRandom(array);
     }
+
+    public int getRandomAgeLimit() {
+        int[] array = {0, 6, 13, 16, 18};
+        Random random = new Random();
+        int i = random.nextInt(array.length);
+        return array[i];
+    }
+
+    public int getRandomYear() {
+        return new Random().nextInt(100) + 1917;
+    }
+
 
 }

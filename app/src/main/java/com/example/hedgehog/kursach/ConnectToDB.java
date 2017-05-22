@@ -78,15 +78,18 @@ public class ConnectToDB extends AsyncTask<URL, Void, ArrayList<Films>> {
                         } else {
                             ageLimit = 0;
                         }
-                        imageUrl = doc.select("div[id=photoBlock]").select("img").first().attr("src");
-                        Films f1 = new Films(null, name, genres, description, year, ageLimit, 0, imageUrl);
-                        films.add(f1);
+
                         Elements elements1 = doc.select("span[itemprop=genre]").select("a");
                         genres = "";
                         for (Element e1 : elements1
                                 ) {
                             genres += e1.text() + ", ";
                         }
+
+                        imageUrl = doc.select("div[id=photoBlock]").select("img").first().attr("src");
+                        Films f1 = new Films(null, name, genres.substring(0, genres.length() - 2), description, year, ageLimit, 0, imageUrl);
+                        films.add(f1);
+                        Log.d("Film:", "run: " + f1.toString());
                     }
                 } catch (IOException e) {
                     e.printStackTrace();

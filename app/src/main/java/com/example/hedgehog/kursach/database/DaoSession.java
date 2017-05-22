@@ -72,7 +72,7 @@ public class DaoSession extends AbstractDaoSession {
         registerDao(Subscribtions.class, subscribtionsDao);
         registerDao(Users.class, usersDao);
     }
-
+    
     public void clear() {
         commentsDaoConfig.clearIdentityScope();
         filmsDaoConfig.clearIdentityScope();

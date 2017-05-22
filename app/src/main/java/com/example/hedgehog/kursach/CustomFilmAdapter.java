@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hedgehog.kursach.database.Films;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -76,8 +77,12 @@ class CustomFilmAdapter extends ArrayAdapter<Films> implements View.OnClickListe
             viewHolder = (ViewHolder) rowView.getTag();
         }
 
-        viewHolder.descriptionTextView.setText("filmId = " + film.getId());
-        viewHolder.nameTextView.setText(film.getName());
+        viewHolder.descriptionTextView.setText("Жанры: " + film.getGenres() + "\nОписание: " + film.getDescription().substring(0, 69) + "...");
+        viewHolder.nameTextView.setText(film.getName() + "(" + film.getYear() + ", " + film.getAgeLimit() + "+)");
+        Picasso.with(getContext())
+                .load(film.getImageUrl())
+                .resize(90, 144)
+                .into(viewHolder.imageView);
 
         return rowView;
     }

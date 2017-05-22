@@ -50,8 +50,7 @@ public class UserAccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new ActiveUserSettings().removeActiveUser(UserAccountActivity.this);
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
+                UserAccountActivity.super.onBackPressed();
             }
         });
 

@@ -6,6 +6,7 @@
         android:id="@+id/account_menu_id"
         android:title="@string/account_title"
         app:showAsAction="always"
-        android:icon="@drawable/ic_account_circle_white_48dp"></item>
+        android:icon="@drawable/ic_account_circle_white_48dp"
+        ></item>
 
 </menu>
