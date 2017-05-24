@@ -19,9 +19,13 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".FilmDetailActivity"
+            >
+
+        </activity>
+
         <uses-permission android:name="android.permission.INTERNET" />
 
-        <activity android:name=".FilmDetailActivity" />
         <activity android:name=".UserAccountActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegistrationActivity" />

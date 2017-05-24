@@ -34,18 +34,6 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/user_favorite_films_button"
-                android:text="@string/user_favorite_films" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/user_watched_films_button"
-                android:text="@string/user_watched_films" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/change_password_button"
                 android:text="@string/change_password" />
 

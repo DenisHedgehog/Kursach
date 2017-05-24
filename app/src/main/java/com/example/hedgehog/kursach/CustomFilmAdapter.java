@@ -77,7 +77,9 @@ class CustomFilmAdapter extends ArrayAdapter<Films> implements View.OnClickListe
             viewHolder = (ViewHolder) rowView.getTag();
         }
 
-        viewHolder.descriptionTextView.setText("Жанры: " + film.getGenres() + "\nОписание: " + film.getDescription().substring(0, 69) + "...");
+
+
+        viewHolder.descriptionTextView.setText("Жанры: " + film.getGenres() + "\nОписание: " + film.getDescription().substring(0, film.getDescription().length()/3) + "...");
         viewHolder.nameTextView.setText(film.getName() + "(" + film.getYear() + ", " + film.getAgeLimit() + "+)");
         Picasso.with(getContext())
                 .load(film.getImageUrl())

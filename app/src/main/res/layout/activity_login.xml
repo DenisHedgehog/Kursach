@@ -13,8 +13,8 @@
         android:hint="@string/login_hint"
         android:id="@+id/login_edit_id"
         android:layout_gravity="center"
-        android:inputType="text"
-        android:fontFamily="sans-serif"/>
+        android:inputType="textEmailAddress"
+        android:fontFamily="sans-serif" />
 
     <EditText
         android:layout_width="125pt"

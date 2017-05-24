@@ -73,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                     activeUserSettings.saveActiveUser(LoginActivity.this, activeAccount);
                     Toast.makeText(LoginActivity.this, "Active user is " + new ActiveUserSettings().getActiveUser(LoginActivity.this), Toast.LENGTH_LONG).show();
                     startActivity(intent);
+                    LoginActivity.this.finish();
                 } else {
                     Toast toast = Toast.makeText(getBaseContext(), "Неверные данные", Toast.LENGTH_LONG);
                     toast.show();
@@ -85,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), RegistrationActivity.class);
                 startActivity(intent);
+                LoginActivity.this.finish();
             }
         });
 

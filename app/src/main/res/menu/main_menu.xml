@@ -7,6 +7,16 @@
         android:title="@string/account_title"
         app:showAsAction="always"
         android:icon="@drawable/ic_account_circle_white_48dp"
-        ></item>
+        >
+
+    </item>
+
+    <item
+        android:id="@+id/add_film"
+        android:title="@string/add_new_film"
+        android:enabled="false"
+        android:visible="false">
+
+    </item>
 
 </menu>

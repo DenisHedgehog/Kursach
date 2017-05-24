@@ -56,4 +56,22 @@
     <string name="search_films_by_genres">Показать фильмы</string>
     <string name="search_films_by_genres_hint">Введите жанр (оставить пустым, чтобы увидеть все фильмы)</string>
     <string name="genres_title">Жанры:</string>
+    <string name="old_password_hint">Введите старый пароль</string>
+    <string name="new_password_hint">Новый пароль</string>
+    <string name="repeat_new_password_hint">Повторите новый пароль</string>
+    <string name="add_new_film">Добавить новый фильм</string>
+    <string name="change_film_title">Изменить фильм</string>
+    <string name="favorite_film">Избранное</string>
+    <string name="new_film_name">Название фильма (обязательно)</string>
+    <string name="new_film_genres">Жанры</string>
+    <string name="new_film_year">Год выпуска</string>
+    <string name="new_film_age_limit">Для лиц старше (по-умолчанию 0)</string>
+    <string name="new_film_description">Описание (обязательно)</string>
+    <string name="new_film_price">Цена (по-умолчанию 0)</string>
+    <string name="new_film_image_url">Ссылка на картинку</string>
+    <string name="comments_text_view">Комментарии</string>
+    <string name="new_comment_hint">Введите комментарий</string>
+    <string name="send_comment_button">Отправить</string>
+    <string name="find_film">Поиск фильма по названию</string>
+    <string name="find_film_button">Поиск</string>
 </resources>

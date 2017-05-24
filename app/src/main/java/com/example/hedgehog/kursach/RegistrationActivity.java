@@ -53,6 +53,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                 usersDao.insert(user);
                                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                                 startActivity(intent);
+                                RegistrationActivity.this.finish();
                                 Toast.makeText(getBaseContext(), "Создан пользователь: \n" + user.toString(), Toast.LENGTH_LONG).show();
                             } else {
                                 Toast.makeText(getBaseContext(), "Пользователь с таким email уже существует", Toast.LENGTH_LONG).show();

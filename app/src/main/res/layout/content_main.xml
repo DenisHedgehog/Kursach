@@ -15,6 +15,18 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/find_film_edit_text"
+                android:hint="@string/find_film"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/find_film_button"
+                android:text="@string/find_film_button"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -39,9 +51,9 @@
 
                 </Spinner>
 
+
+
             </LinearLayout>
-
-
 
             <ListView
                 android:id="@+id/film_list_id"

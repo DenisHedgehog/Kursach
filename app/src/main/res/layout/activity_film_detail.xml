@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -17,29 +20,63 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/film_image_view"
                 android:layout_gravity="center_horizontal"
-                android:scaleType="fitCenter"
-                android:layout_margin="3pt" />
+                android:layout_margin="4pt" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/film_year"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="3pt" />
+                android:layout_margin="4pt" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/film_genres"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="3pt" />
+                android:layout_margin="4pt" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/film_description"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="3pt" />
+                android:layout_margin="4pt" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/film_price"
+                android:layout_margin="4pt"
+                android:textSize="10pt" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/comments_text_view"
+                android:text="@string/comments_text_view"
+                android:textSize="10pt"
+                android:layout_margin="4pt"/>
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4pt"
+                android:id="@+id/comments_list_view"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/new_comment_edit_text"
+                android:hint="@string/new_comment_hint"
+                android:layout_margin="4pt"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/send_comment_button"
+                android:text="@string/send_comment_button"
+                android:layout_margin="4pt"/>
 
         </LinearLayout>
 
